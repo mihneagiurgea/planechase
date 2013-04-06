@@ -14,13 +14,17 @@ Template.play.rendered = function() {
         // if (typeof console !== 'undefined')
         //     console.log("Key up: " + e.which);
         switch (e.which) {
-            case 82: // Roll
+
+            case 82: // "r" key
                 roll();
                 break;
-            case 80: // Planeswalk
+            case 39: // "->" right arrow
+            case 80: // "p" key
                 planeswalk();
                 break;
-            case 85: // Undo planeswalk
+
+            case 37: // "<-" left arrow
+            case 85: // "u" key
                 undoPlaneswalk();
                 break;
         }
