@@ -1,0 +1,52 @@
+<head>
+  <title>Planechase</title>
+</head>
+
+<body>
+  {{> play}}
+
+</body>
+
+<template name="play">
+
+  <table>
+  <tr>
+    <td width="300px" valign='top'>
+
+        <br />
+        <div style='font-weight: regular; font-size: 22px;'>
+          <span> Die result: </span>
+          <span id='dieResult'> </span>
+        </div>
+
+        <div style='font-size: 12px; position: absolute; bottom: 10px;'>
+          <u>Keyboard shortcuts:</u>
+          <ul>
+            <li><b>r</b> - Roll the planar die.</li>
+            <li><b>p</b> - Planeswalk </li>
+            <li><b>u</b> - Undo planeswalk </li>
+          </ul>
+        </div>
+
+    </td>
+    <td width="700px" align='center'>
+
+      <img alt='Roll the planar die' title='Roll the planar die'
+           style='font-size: 26px;' name='die' id='die'
+           src='blank.jpg' />
+      <br />
+      <img id='planecard' src='0.jpg' height='450px'/>
+
+    </td>
+  </tr>
+  </table>
+
+  <input type="text" />
+
+</template>
+
+<template name="hello">
+  <h1>Hello World 2!</h1>
+  {{greeting}}
+
+</template>
