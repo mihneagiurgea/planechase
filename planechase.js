@@ -6,7 +6,18 @@ if (Meteor.isServer) {
 
     Meteor.startup(function () {
         // code to run on server at startup
-        var fs = __meteor_bootstrap__.require('fs');
-        // var files = fs.readdirSync(); //Etc.
+
+
+    });
+
+    Meteor.methods({
+        'getCards': function () {
+            var fs = Npm.require('fs');
+
+            cards = fs.readdirSync('public/cards');
+            console.log('Read ' + cards.length + ' cards from fs.');
+
+            return cards;
+        }
     });
 }

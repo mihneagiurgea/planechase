@@ -1,7 +1,17 @@
 Meteor.startup(function () {
-    for (i = 0; i < nrPlanecards; i++)
-        plains[i] = i + 1;
-    shuffle(plains);
+
+    // Contact the server to find the list of cards, asynchronously.
+    Meteor.call('getCards', 1, 5, function (error, result) {
+        if (error) {
+            console.log('Method getCards error: ' + JSON.stringify(error));
+            alert('Something went wrong, please refresh.');
+            return;
+        }
+        console.log('Method getCards result: ' + result);
+        cards = result;
+        shuffle(cards);
+    });
+
 });
 
 Template.play.events({
@@ -31,11 +41,8 @@ Template.play.rendered = function() {
     });
 };
 
-// If new cards are added, just name them 50.jpg, 51.jpg etc,
-// and enter here the highest number.
-var nrPlanecards = 79;
 var current = -1;
-var plains = [];
+var cards = null;
 
 function rand(limit) {
     // Returns a random integer in interval [0, limit).
@@ -59,15 +66,19 @@ function setPlainImage() {
     if (current == -1)
         img_src = '0.jpg';
     else
-        img_src = 'cards/' + plains[current] + '.jpg';
+        img_src = 'cards/' + cards[current];
     $('#planecard').attr('src', img_src);
 }
 
 function planeswalk() {
+    // If the cards resource is not yet ready (getCards is async), do nothing.
+    if (cards == null) return;
+
     current++;
-    if (current >= nrPlanecards) {
-        shuffle(plains);
-        current = 1;
+    if (current >= cards.length) {
+        // Re-shuffle deck & start-over.
+        shuffle(cards);
+        current = 0;
     }
     setPlainImage();
 }
@@ -101,7 +112,7 @@ function roll() {
     $('#die').attr('src', die_image);
     $('#dieResult').css('color', color);
     $('#dieResult').text(result);
-    $('#dieResult').stop();
+    $('#dieResult').stop(true, true);
     $('#dieResult').show();
     $('#dieResult').fadeOut(2000);
 }
