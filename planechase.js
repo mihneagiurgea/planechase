@@ -12,12 +12,21 @@ if (Meteor.isServer) {
 
     Meteor.methods({
         'getCards': function () {
-            var fs = Npm.require('fs');
+            try {
+                var fs = Npm.require('fs');
 
-            cards = fs.readdirSync('public/cards');
-            console.log('Read ' + cards.length + ' cards from fs.');
+                function endsWith(str, suffix) {
+                    console.log(str + ' <- ' + suffix);
+                    return str.indexOf(suffix, str.length - suffix.length) !== -1;
+                }
 
-            return cards;
+                files = fs.readdirSync('./public/cards');
+                cards = _.filter(files, function(f) { return endsWith(f, '.jpg'); });
+
+                return cards;
+            } catch (err) {
+                return JSON.stringify(err);
+            }
         }
     });
 }

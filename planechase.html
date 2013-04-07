@@ -9,15 +9,15 @@
 
 <template name="play">
 
-  <table>
-  <tr>
-    <td width="300px" valign='top'>
+    <div style="float: left; width: 261px;">
 
-        <br />
         <div style='font-weight: regular; font-size: 22px;'>
           <span> Die result: </span>
           <span id='dieResult'> </span>
         </div>
+        <img alt='Roll the planar die' title='Roll the planar die'
+           style='font-size: 26px;' name='die' id='die'
+           src='blank.jpg' />
 
         <div style='font-size: 12px; position: absolute; bottom: 10px;'>
           <u>Keyboard shortcuts:</u>
@@ -28,17 +28,10 @@
           </ul>
         </div>
 
-    </td>
-    <td width="700px" align='center'>
+    </div>
 
-      <img alt='Roll the planar die' title='Roll the planar die'
-           style='font-size: 26px;' name='die' id='die'
-           src='blank.jpg' />
-      <br />
-      <img id='planecard' src='0.jpg' height='450px'/>
-
-    </td>
-  </tr>
-  </table>
+    <div style="float: right; width=850px;">
+        <img id='planecard' src='0.jpg' height='650px'/>
+    </div>
 
 </template>
